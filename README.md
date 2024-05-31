@@ -1,7 +1,7 @@
 
 ## Getting Started
 
-In order to run the finetuned model from this repo you will need to clone the [SELFormer](https://github.com/HUBioDataLab/SELFormer) repository and follow the steps outlined for generating selfies. An example of the structure of the final repo including both SELFormer and this pIC50_prediction repo is given below. The pretrained XGBoost model is available [here](/novo/users/hlaf/pIC50_prediction/models/XGBoost) and the finetuned SELFormer model is available [here](https://drive.google.com/file/d/1S55g0ld8iqA4F2m__ghR6hgkIKWN6Xo9/view?usp=drive_link). 
+In order to run the finetuned model from this repo you will need to clone the [SELFormer](https://github.com/HUBioDataLab/SELFormer) repository and follow the steps outlined for generating selfies. An example of the structure of the final repo including both SELFormer and this pIC50_prediction repo is given below. The pretrained XGBoost model is available [here](https://drive.google.com/file/d/1Jb6x7HL1UyJMzzeEyqN8EDZ3YrFn58Jp/view?usp=sharing) and the finetuned SELFormer model is available [here](https://drive.google.com/file/d/1S55g0ld8iqA4F2m__ghR6hgkIKWN6Xo9/view?usp=drive_link). 
 
 
 ```
