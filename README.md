@@ -1,13 +1,24 @@
 
-# pIC50_prediction
-
-During the course of a drug discovery program, a critical task is the ability to “screen” a library of compounds in order to find molecules that can bind to and potentially inhibit the activity of a target protein (we call such readout “potency”) and it is measured by pIC50. Virtual in silico screening serves as a useful cost-effective tool for screening the vast number of molecules. 
-
-A variety of methods are available for virtual screening, including ligand-based machine learning models that rely on the molecular structure as input to predict their activities. In this project, pIC50 is predicted from the Epidermal Growth Factor Receptor (EGFR) kinase dataset, a target associated with various cancers. "Fingerprints" i.e. numerical representations of a molecule's chemical structure and properties are generated from both standard libraries and deep learning derived embeddings using a pretrained [SELFormer](https://github.com/HUBioDataLab/SELFormer) foundation model. 
-
 ## Getting Started
 
-In order to run the finetuned model from this repo you will need to clone the [SELFormer](https://github.com/HUBioDataLab/SELFormer) repository and follow the steps outlined for generating selfies. 
+In order to run the finetuned model from this repo you will need to clone the [SELFormer](https://github.com/HUBioDataLab/SELFormer) repository and follow the steps outlined for generating selfies. An example of the structure of the final repo including both SELFormer and this pIC50_prediction repo is given below.
+
+
+```
+├── models
+│   ├── SELFormer
+│   │   ├── data
+│   │   │   ├── test.csv
+│   │   │   ├── train.csv
+│   │   │   ├── finetuned_models
+│   │   │   │   └── modelO_EGFR
+│   │   │   ├── predictions
+│   │   │   ├── pretrained_models
+│   └── XGBoost
+├── notebooks
+├── requirements.txt
+└── utils
+```
 
 ## Generating Embeddings Using Finetuned Model
 
@@ -38,5 +49,18 @@ python3 train_classification_model.py --model=data/finetuned_model/modelO_EGFR -
 * __--num_epochs__: Default: 50. Number of epochs (optional).
 * __--lr__: Default: 1e-5: Learning rate (optional).
 * __--wd__: Default: 0.1: Weight decay (optional).
+
+### Producing Molecular Property Predictions with Fine-tuned Models
+
+To make predictions from the finetuned model please run the command below. Change the indicated arguments for different tasks. 
+
+```
+python3 binary_class_pred.py --task=EGFR --model_name=data/finetuned_models/modelO_EGFR --tokenizer=data/RobertaFastTokenizer --pred_set=data/finetuning_datasets/classification/test.csv --training_args=data/finetuned_models/modelO_EGFR/checkpoint-720/training_args.bin
+```
+* __script__: Any of train_classification_model.py, train_classification_multilabel_model.py or train_regression_model.py depending on the task objective. 
+* __--model_name__: Directory of the finetuned model (required).
+* __--tokenizer__: Tokenizer selection (required).
+* __--pred_set__: Molecules to make predictions. Should be a CSV file with a single column. Header should be smiles (required)..
+* __--training_args: Initialize the model arguments (required).
 
 
